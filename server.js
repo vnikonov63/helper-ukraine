@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
 
+const __dirname = path.resolve()
+
 import { modelDriver } from "./models/driver.js";
 
 mongoose.connect(
