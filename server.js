@@ -15,12 +15,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static('my-app/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'my-app/build', 'index.html'))
-  })
-}
 
 app.post("/getDrivers", async (req, res) => {
   const drivers = await modelDriver.find();
@@ -48,6 +42,13 @@ app.patch("/status", async (req,res) => {
   
   res.send(200)
 })
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static('my-app/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'my-app/build', 'index.html'))
+  })
+}
 
 
 const port = process.env.PORT || 3001;
